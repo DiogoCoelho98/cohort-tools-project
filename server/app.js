@@ -7,10 +7,13 @@ const PORT = 5005;
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
 // ...
 
+const dataCohort = require("./cohorts.json");
+const dataStudent = require("./students.json");
+
+
 
 // INITIALIZE EXPRESS APP - https://expressjs.com/en/4x/api.html#express
 const app = express();
-
 
 // MIDDLEWARE
 // Research Team - Set up CORS middleware here:
@@ -29,8 +32,16 @@ app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
 
+app.get("/api/cohorts", (req, res) => {
+  res.status(200).json(dataCohort)
+});
 
-// START SERVER
+app.get ("/api/students", (req, res) => {
+  res.status(200).json(dataStudent)
+});
+
+
+// START SERVERs
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

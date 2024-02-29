@@ -8,7 +8,7 @@ router.get("/cohorts", async (req, res) => {
         res.status(200).json(data);
     }
     catch (error) {
-        console.log(error);
+       console.log(error);
     }
   });
 

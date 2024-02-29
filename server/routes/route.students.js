@@ -6,7 +6,7 @@ const data = require('../utils/data/students');
 /* Create our GET route */
 router.get("/students", async (req, res) => { // Get all students
     try{
-        const allStudents = await Student.find();
+        const allStudents = await Student.find().populate("cohort");
         res.status(200).json(data);
     }
     catch(error){

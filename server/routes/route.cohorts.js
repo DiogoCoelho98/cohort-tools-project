@@ -1,20 +1,21 @@
 const router = require('express').Router();
 const Cohort = require('../models/cohorts');
+const data = require('../utils/data/cohorts.json')
 
 router.get("/cohorts", async (req, res) => {
     try {
         const allCohort = await Cohort.find()
-        res.status(200).json(allCohort);
+        res.status(200).json(data);
     }
     catch (error) {
         console.log(error);
     }
   });
 
-  router.get("/cohorts/:cohortId", async (req, res) => {
+  router.get("/cohorts/:_id", async (req, res) => {
     try {
-        const {id} = req.params;
-        const cohort = await Cohort.findById(id);
+        const {_id} = req.params;
+        const cohort = await Cohort.findById(_id);
         res.status(200).json(cohort);
     }
     catch (error) {

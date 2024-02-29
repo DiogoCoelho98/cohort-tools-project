@@ -27,7 +27,7 @@ router.get("/students/cohort/:id", async (req, res) => { // Get all students by 
 });
 
 //Create our READ route
-router.get("/students/:id", async (req, res) => { // Get a student by ID
+router.get("/students/:_id", async (req, res) => { // Get a student by ID
     try{
         const { _id } = req.params;
         const student = await Student.findById(_id);

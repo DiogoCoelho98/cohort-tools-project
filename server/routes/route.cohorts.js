@@ -5,7 +5,7 @@ const data = require('../utils/data/cohorts.json')
 router.get("/cohorts", async (req, res) => {
     try {
         const allCohort = await Cohort.find()
-        res.status(200).json(data);
+        res.status(200).json(allCohort  );
     }
     catch (error) {
        console.log(error);

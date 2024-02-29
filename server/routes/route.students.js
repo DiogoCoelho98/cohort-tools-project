@@ -1,16 +1,16 @@
 // router.students.js
 const router = require('express').Router();
 const Student = require('../models/students');
-const data = require('../utils/data/students');
+
 
 /* Create our GET route */
 router.get("/students", async (req, res) => { // Get all students
     try{
         const allStudents = await Student.find().populate("cohort");
-        res.status(200).json(data);
+        res.status(200).json(allStudents);
     }
     catch(error){
-        console.log(error);
+    console.log(error);
     }
 });
 
@@ -18,7 +18,7 @@ router.get("/students", async (req, res) => { // Get all students
 router.get("/students/cohort/:id", async (req, res) => { // Get all students by cohort ID
     try{
         const { id } = req.params;
-        const studentsByCohort = await Student.find({ cohort: id });
+        const studentsByCohort = await Student.find({ cohort: id }).populate("cohort");
         res.status(200).json(studentsByCohort);
     } 
     catch(error){
@@ -30,7 +30,7 @@ router.get("/students/cohort/:id", async (req, res) => { // Get all students by 
 router.get("/students/:_id", async (req, res) => { // Get a student by ID
     try{
         const { _id } = req.params;
-        const student = await Student.findById(_id);
+        const student = await Student.findById(_id).populate("cohort");
         res.status(200).json(student);
     }
     catch(error){

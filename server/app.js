@@ -14,6 +14,7 @@ const dataCohort = require("./cohorts.json");
 const dataStudent = require("./students.json");
 const Student = require("./models/students");
 const cohort = require("./models/cohorts");
+const { errorHandler, notFoundHandler} = require("./middleware/error-handling");
 
 
 
@@ -36,11 +37,13 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors())
-
+app.use(errorHandler);
+app.use(notFoundHandler);
 
 // ROUTES - https://expressjs.com/en/starter/basic-routing.html
 // Devs Team - Start working on the routes here:
 // ...
+
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
@@ -54,6 +57,6 @@ app.use("/api", cohortRoutes);
 // START SERVERs
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
-});
+}); // wanna rape someone?
 
 //console.log(Date())

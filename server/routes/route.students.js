@@ -15,30 +15,30 @@ router.get("/students", async (req, res, next) => { // Get all students
 });
 
 // Create our GET route to get all students by cohort id
-router.get("/students/cohort/:id", async (req, res) => { // Get all students by cohort ID
+router.get("/students/cohort/:id", async (req, res, next) => { // Get all students by cohort ID
     try{
         const { id } = req.params;
         const studentsByCohort = await Student.find({ cohort: id }).populate("cohort");
         res.status(200).json(studentsByCohort);
     } 
     catch(error){
-        console.log(error);
+        next(error);
     }
 });
 
 //Create our READ route
-router.get("/students/:_id", async (req, res) => { // Get a student by ID
+router.get("/students/:_id", async (req, res, next) => { // Get a student by ID
     try{
         const { _id } = req.params;
         const student = await Student.findById(_id).populate("cohort");
         res.status(200).json(student);
     }
     catch(error){
-        console.log(error);
+        next(error);
     }
 })
 //Create our POST route
-router.post("/students", async (req, res) => { // Create a new student
+router.post("/students", async (req, res, next) => { // Create a new student
     try{
         const { firstName, lastName, email, phone, linkedinUrl, languages, program, background, image, cohort, projects } = req.body;
         const newStudent = await Student.create({
@@ -57,12 +57,12 @@ router.post("/students", async (req, res) => { // Create a new student
         res.status(200).json(newStudent);
     }
     catch (error){
-        console.log(error);
+        next(error);
     }
 })
 
 //Create our PUT
-router.put("/students/:id", async (req, res) => { // Update a student by ID
+router.put("/students/:id", async (req, res, next) => { // Update a student by ID
     try{
         const { id } = req.params;
         const { firstName, lastName, email, phone, linkedinUrl, languages, program, background, image, cohort, projects } = req.body;
@@ -90,12 +90,12 @@ router.put("/students/:id", async (req, res) => { // Update a student by ID
         res.status(200).json(updatedStudent);
     }
     catch(error){
-        console.log(error);
+        next(error);
     }
 })
 
 //Create DELETE
-router.delete("/students/:id", async (req, res) => { // Delete a student by ID
+router.delete("/students/:id", async (req, res, next) => { // Delete a student by ID
     try{
         const { id } = req.params;
         const deletedStudent = await Student.findByIdAndDelete(id);
@@ -108,7 +108,7 @@ router.delete("/students/:id", async (req, res) => { // Delete a student by ID
         res.status(200).json(deletedStudent);
     }
     catch(error){
-        console.log(error);
+        next(error);
     }
 });
 

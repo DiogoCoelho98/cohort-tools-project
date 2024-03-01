@@ -37,8 +37,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors())
-app.use(errorHandler);
-app.use(notFoundHandler);
+
 
 // ROUTES - https://expressjs.com/en/starter/basic-routing.html
 // Devs Team - Start working on the routes here:
@@ -54,9 +53,15 @@ app.use("/api", studentRoutes);
 const cohortRoutes = require("./routes/route.cohorts")
 app.use("/api", cohortRoutes);
 
+app.use(errorHandler);
+app.use(notFoundHandler);
+
+// require("./middleware/error-handling")(app)
+
 // START SERVERs
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
-}); // wanna rape someone?
+}); 
 
 //console.log(Date())
+// module.exports = app; 

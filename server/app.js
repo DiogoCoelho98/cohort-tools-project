@@ -6,6 +6,7 @@ const PORT = 5005;
 const mongoose = require("mongoose");
 
 
+
 // STATIC DATA
 // Devs Team - Import the provided files with JSON data of students and cohorts here:
 // ...
@@ -14,6 +15,7 @@ const dataCohort = require("./cohorts.json");
 const dataStudent = require("./students.json");
 const Student = require("./models/students");
 const cohort = require("./models/cohorts");
+const User = require("./models/user");
 const { errorHandler, notFoundHandler} = require("./middleware/error-handling");
 
 
@@ -52,6 +54,9 @@ app.use("/api", studentRoutes);
 
 const cohortRoutes = require("./routes/route.cohorts")
 app.use("/api", cohortRoutes);
+
+const userRoutes = require("./routes/route.auth")
+app.use("/auth", userRoutes);
 
 app.use(errorHandler);
 app.use(notFoundHandler);
